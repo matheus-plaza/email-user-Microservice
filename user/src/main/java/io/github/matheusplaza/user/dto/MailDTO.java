@@ -1,8 +1,9 @@
-package io.github.matheusplaza.mail.dto;
+package io.github.matheusplaza.user.dto;
 
 import lombok.Builder;
 
 import java.util.UUID;
+
 @Builder
 public record MailDTO(
         UUID userId,
