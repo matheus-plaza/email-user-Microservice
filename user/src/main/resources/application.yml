@@ -16,10 +16,10 @@ spring:
 
 
   rabbitmq:
-    addresses: campbell.lmq.cloudamqp.com:5671
-    username: pmmsvtic
-    password: PcK2m7F2Fo3ofYYbV_nIPNPcRCu5uKUv
-    virtual-host: pmmsvtic
+    addresses: ${RABBITMQ_ADDRESSES}
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+    virtual-host: ${RABBITMQ_VIRTUAL_HOST}
     ssl:
       enabled: true
       algorithm: TLS

@@ -3,6 +3,7 @@ package io.github.matheusplaza.mail.entity;
 import io.github.matheusplaza.mail.enums.MailStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +15,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class MailModel {
 
     private final long serialVersionUID = 1L;
@@ -21,7 +23,7 @@ public class MailModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID mailId;
-    private UUID mailTo;
+    private String mailTo;
     private String mailFrom;
     private String mailSubject;
     @Column(columnDefinition = "TEXT")

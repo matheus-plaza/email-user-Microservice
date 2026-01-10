@@ -19,6 +19,7 @@ public class UserProducer {
     }
 
     public void sendMail(UserModel userModel) {
+
         rabbitTemplate.convertAndSend(
                 "", //direct / default,
                 queueName,
@@ -26,7 +27,13 @@ public class UserProducer {
                         .userId(userModel.getUserId())
                         .emailTo(userModel.getUserMail())
                         .subject("Welcome " + userModel.getUserName())
-                        .body("Hello " + userModel.getUserName() + ", \n\n Enjoy my application! ")
+                        .body("Olá " + userModel.getUserName() + ",\n\n" +
+                                "Seja muito bem-vindo(a) à nossa plataforma! 🎉\n\n" +
+                                "Estamos felizes em tê-lo(a) conosco. Sua conta foi criada com sucesso.\n\n" +
+                                "Aproveite todos os recursos disponíveis e, se precisar de ajuda, " +
+                                "nossa equipe de suporte está sempre à disposição.\n\n" +
+                                "Atenciosamente,\n" +
+                                "Equipe de Suporte")
                         .build());
     }
 }
