@@ -15,7 +15,7 @@ public class MailConsumer {
 
     private final MailService mailService;
 
-    @RabbitListener(queues = "${QUEUE_NAME}")
+    @RabbitListener(queues = "${SEND_EMAIL_QUEUE}")
     public void listenMailQueue(@Payload MailDTO mailDTO) {
         log.info("Message received: {}", mailDTO);
         mailService.sendMail(mailDTO);

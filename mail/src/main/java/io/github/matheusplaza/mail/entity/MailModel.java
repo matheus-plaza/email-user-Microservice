@@ -29,6 +29,7 @@ public class MailModel {
     @Column(columnDefinition = "TEXT")
     private String mailBody;
     private String userId;
+    @Enumerated(EnumType.STRING)
     private MailStatus mailStatus;
     private LocalDateTime createdAt;
 

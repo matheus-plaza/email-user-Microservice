@@ -1,9 +1,11 @@
 package io.github.matheusplaza.mail.service;
 
+import io.github.matheusplaza.mail.consumer.MailConsumer;
 import io.github.matheusplaza.mail.dto.MailDTO;
 import io.github.matheusplaza.mail.entity.MailModel;
 import io.github.matheusplaza.mail.enums.MailStatus;
 import io.github.matheusplaza.mail.mapper.MailMapper;
+import io.github.matheusplaza.mail.producer.MailProducer;
 import io.github.matheusplaza.mail.repository.MailRepository;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
@@ -27,6 +29,7 @@ public class MailService {
     private final JavaMailSender mailSender;
     private final MailRepository mailRepository;
     private final MailMapper mailMapper;
+    private final MailProducer mailProducer;
 
     @Transactional
     public void sendMail(MailDTO mailDTO) {
@@ -47,8 +50,13 @@ public class MailService {
         } catch (Exception e) {
             mailModel.setMailStatus(MailStatus.FAILED);
             log.error("Failed to send email to: {}. Error: {}", mailDTO.emailTo(), e.getMessage());
+            errorSendMail(mailDTO);
         }
 
         mailRepository.save(mailModel);
+    }
+
+    public void errorSendMail(MailDTO mailDTO) {
+        mailProducer.sendErrorMessage(mailDTO);
     }
 }

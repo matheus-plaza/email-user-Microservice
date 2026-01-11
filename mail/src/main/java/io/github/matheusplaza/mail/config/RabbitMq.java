@@ -10,16 +10,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMq {
 
-    @Value("${QUEUE_NAME}")
-    private final String queueName;
-
-    public RabbitMq(@Value("${QUEUE_NAME}") String mailQueue) {
-        this.queueName = mailQueue;
-    }
+    @Value("${SEND_EMAIL_QUEUE}")
+    private String sendEmailQueueName;
 
     @Bean
-    public Queue getQueue() {
-        return new Queue(queueName, true);
+    public Queue sendEmailQueue() {
+        return new Queue(sendEmailQueueName, true);
     }
 
     @Bean
